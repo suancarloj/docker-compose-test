@@ -1,0 +1,29 @@
+version: '2'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo-q
+    ports:
+    - "27017:27017"
+  memcached:
+    image: memcached
+    container_name: memcached-q
+    ports:
+    - "11211:11211"
+  postgres:
+    container_name: postgres-q
+    image: postgres:9.5.7
+    ports:
+      - "5432:5432"
+    environment:
+      - DEBUG=true
+      - POSTGRES_USER=tech
+      - POSTGRES_PASSWORD=qovertech
+      - POSTGRES_DB=ebdb
+  fake-s3:
+    image: lphoward/fake-s3
+    container_name: fake-s3-q
+    ports:
+    - "4569:4569"
+    volumes:
+    - /tmp:/fakes3_root
